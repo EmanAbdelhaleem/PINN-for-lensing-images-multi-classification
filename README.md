@@ -84,7 +84,11 @@ A hybrid model that incorporates physics-based lensing information.
 - **LensVIT_PINN**: Matches closely, with minor trade-offs in AUC scores.
 
 #### Physics-Informed Trials
-- **Initial Attempt**: Used additional gradient preprocessing (`physics_preprocess`), but this **reduced AUC to 0.8786** due to excessive noise.
+- **Initial Attempt**: Used additional gradient preprocessing (`physics_preprocess`) using the following formula:
+$$
+\text{distortion} = \left| \tanh \left( \nabla_x \nabla_y \left( \log \left( \frac{I_{\max}}{I} \right) \right)^2 \right) \right|
+$$
+, but this **reduced AUC to 0.8786** due to excessive noise.
 - **Final Approach**: Removed preprocessing and relied purely on the gravitational lensing equation, leading to more stable results.
 
 
